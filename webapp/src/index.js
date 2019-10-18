@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import AppRouter from './routes'
-import { ApolloProvider } from 'react-apollo'
-import { client } from './network/apollo-client'
+import AppRouter from './routes/routes'
+import { ApolloProvider } from '@apollo/react-hooks'
+import { client } from './utils/apollo-client'
 
 ReactDOM.render(
   (
