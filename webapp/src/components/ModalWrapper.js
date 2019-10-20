@@ -20,26 +20,26 @@ const styles = {
     backgroundColor: '#ffffff',
     borderRadius: '5px',
     width: '65%',
-    padding: '15px'
+    padding: '15px',
+    display: 'flex',
+    flexDirection: 'column'
   })
 }
 
-const Modal = ({ open, closeModal, children }) => {
+const ModalWrapper = ({ open, children }) => {
   return open && (
     <div css={styles.modalContainer}>
       <div css={styles.modalContent}>
-        <button onClick={closeModal}>Close</button>
         {children}
       </div>
     </div>
   )
 }
 
-Modal.propTypes = {
+ModalWrapper.propTypes = {
   open: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired
 }
-Modal.defaultProps = {}
+ModalWrapper.defaultProps = {}
 
-export default Modal
+export default ModalWrapper

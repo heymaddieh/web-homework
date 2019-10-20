@@ -9,16 +9,18 @@ const styles = {
     border: 'none',
     borderRadius: '3px',
     color: 'white',
+    fontSize: '14px'
   })
 }
 
-const Button = ({ color = 'green', children, onClick, disabled, css, ...elementProps }) => {
+const Button = ({ color, children, onClick, disabled, css, ...elementProps }) => {
   return (
     <button
       css={[styles.button, css]}
-      style={{ backgroundColor: colors[color] }}
       disabled={disabled}
       onClick={onClick}
+      style={{ backgroundColor: colors[color], opacity: disabled ? '.5' : '1' }}
+      type='button'
       {...elementProps}
     >
       {children}
@@ -31,12 +33,14 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   className: PropTypes.string,
-  color: PropTypes.string.isRequired,
-  css: PropTypes.string.isRequired
+  color: PropTypes.string,
+  css: PropTypes.string
 }
 Button.defaultProps = {
   disabled: false,
-  className: ''
+  className: '',
+  color: 'green',
+  css: ''
 }
 
 export default Button

@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import { css, Global } from '@emotion/core'
 
 import Home from './home/index'
-import Transactions from '../components/transactions'
-import {colors} from '../global';
+import { colors } from '../global'
 
 const AppRouter = (props) => {
   return (
@@ -23,7 +22,7 @@ const AppRouter = (props) => {
               <Link to='/'>Home</Link>
             </li>
             <li>
-              {/*<Link to='/transactions'>Transactions</Link>*/}
+              <Link to='/metrics'>Metrics</Link>
             </li>
           </ul>
         </nav>
@@ -51,7 +50,9 @@ const styles = {
     }
   }),
   mainContent: css({
-    width: '100%'
+    width: '100%',
+    height: '100vh',
+    overflow: 'scroll'
   })
 }
 
