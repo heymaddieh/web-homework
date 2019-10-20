@@ -5,8 +5,9 @@ import { DELETE_TRANSACTION, GET_TRANSACTIONS } from '../../utils/graphqlQueries
 import styles from './index.styles'
 import Button from '../Button'
 import ModalWrapper from '../ModalWrapper'
+import convertToRomanNumeral from '../../utils/convertToRomanNumeral'
 
-const Transactions = ({ openEditTransaction }) => {
+const Transactions = ({ openEditTransaction, useRomanNumerals = false }) => {
   const { loading, error, data } = useQuery(GET_TRANSACTIONS)
   const [deleteTransaction] = useMutation(DELETE_TRANSACTION)
   const [modalOpen, setModalOpen] = useState(false)
@@ -25,7 +26,7 @@ const Transactions = ({ openEditTransaction }) => {
               <p css={styles.type}>{txn.credit ? 'Credit' : 'Debit'}</p>
             </div>
             <div css={styles.rightContainer}>
-              <p css={styles.amount}>${txn.amount}</p>
+              <p css={styles.amount}>${convertToRomanNumeral(txn.amount, useRomanNumerals)}</p>
               <Button color='coral' onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
@@ -63,7 +64,8 @@ const Transactions = ({ openEditTransaction }) => {
 }
 
 Transactions.propTypes = {
-  openEditTransaction: PropTypes.func.isRequired
+  openEditTransaction: PropTypes.func.isRequired,
+  useRomanNumerals: PropTypes.bool.isRequired
 }
 Transactions.defaultProps = {}
 

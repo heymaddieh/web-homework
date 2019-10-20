@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-const Radio = ({ value, onClick, label }) => {
+const Checkbox = ({ value, onClick, label }) => {
   return (
     <label css={styles.label}>
       <input
         checked={value}
         onClick={onClick}
-        type={'radio'}
+        type={'checkbox'}
         value={value}
       />
       {label}
@@ -23,11 +23,11 @@ const styles = {
   })
 }
 
-Radio.propTypes = {
+Checkbox.propTypes = {
   value: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired
 }
-Radio.defaultProps = {}
+Checkbox.defaultProps = {}
 
-export default Radio
+export default Checkbox
