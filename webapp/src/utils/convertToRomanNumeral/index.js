@@ -1,4 +1,4 @@
-export const convertToRomanNumeral = (num, isRoman) => {
+export const index = (num, isRoman) => {
   // If the number is falsey including invalid values, just return 0
   if (!num || typeof num !== 'number') return 0
   // if the roman numeral setting is turned on
@@ -30,4 +30,4 @@ export const convertToRomanNumeral = (num, isRoman) => {
   return num
 }
 
-export default convertToRomanNumeral
+export default index

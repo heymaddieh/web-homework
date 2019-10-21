@@ -7,7 +7,7 @@ const Checkbox = ({ value, onClick, label }) => {
     <label css={styles.label}>
       <input
         checked={value}
-        onClick={onClick}
+        onChange={onClick}
         type={'checkbox'}
         value={value}
       />

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styles from './index.styles'
 import Button from '../Button'
 import ModalWrapper from '../ModalWrapper'
-import convertToRomanNumeral from '../../utils/convertToRomanNumeral'
+import index from '../../utils/convertToRomanNumeral/index'
 import { useMutation } from '@apollo/react-hooks'
 import { DELETE_TRANSACTION, GET_TRANSACTIONS } from '../../utils/graphqlQueries'
 
@@ -22,7 +22,7 @@ const Transactions = ({ transactions, openEditTransaction, useRomanNumerals = fa
               <p css={styles.type}>{txn.credit ? 'Credit' : 'Debit'}</p>
             </div>
             <div css={styles.rightContainer}>
-              <p css={styles.amount}>${convertToRomanNumeral(txn.amount, useRomanNumerals)}</p>
+              <p css={styles.amount}>${index(txn.amount, useRomanNumerals)}</p>
               <Button color='coral' onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()

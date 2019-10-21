@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
-// import { Link } from 'react-router-dom'
 import Transactions from '../../components/transactions'
 import Button from '../../components/Button'
 import { css } from '@emotion/core'
 import CreateTransactionModal from '../../components/CreateTransactionModal'
 import Subheader from '../../components/Subheader'
 import Checkbox from '../../components/Checkbox'
-import { useQuery, useLazyQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import { GET_TRANSACTIONS } from '../../utils/graphqlQueries'
 
 const Home = () => {
   const { loading, error, data } = useQuery(GET_TRANSACTIONS)
-  const [getTransactions] = useLazyQuery(GET_TRANSACTIONS)
   const [modalOpen, setModalOpen] = useState(false)
   const [activeTransaction, setActiveTransaction] = useState(null)
   const [useRomanNumerals, setUseRomanNumerals] = useState(false)
@@ -46,7 +44,6 @@ const Home = () => {
           closeModal={() => {
             setModalOpen(false)
             setActiveTransaction(null)
-            getTransactions()
           }}
           open
         />

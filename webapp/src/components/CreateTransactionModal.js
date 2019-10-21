@@ -16,6 +16,7 @@ import { colors } from '../global'
 const CreateTransactionModal = (props) => {
   const { closeModal, activeTransaction } = props
 
+  // activeTransaction indicates that a transaction needs to be edited instead of created
   const initialState = {
     amount: activeTransaction ? activeTransaction.amount : 0,
     description: activeTransaction ? activeTransaction.description : '',
@@ -34,6 +35,7 @@ const CreateTransactionModal = (props) => {
   const [editTransaction] = useMutation(UPDATE_TRANSACTION)
 
   const setTransactionType = (type) => {
+    // Making sure that credit and debit are mutually exclusive
     if (type === 'credit') {
       setDebit(false)
       setCredit(true)
