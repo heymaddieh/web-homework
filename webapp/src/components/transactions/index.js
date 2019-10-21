@@ -1,26 +1,22 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { DELETE_TRANSACTION, GET_TRANSACTIONS } from '../../utils/graphqlQueries'
 import styles from './index.styles'
 import Button from '../Button'
 import ModalWrapper from '../ModalWrapper'
 import convertToRomanNumeral from '../../utils/convertToRomanNumeral'
+import { useMutation } from '@apollo/react-hooks'
+import { DELETE_TRANSACTION, GET_TRANSACTIONS } from '../../utils/graphqlQueries'
 
-const Transactions = ({ openEditTransaction, useRomanNumerals = false }) => {
-  const { loading, error, data } = useQuery(GET_TRANSACTIONS)
-  const [deleteTransaction] = useMutation(DELETE_TRANSACTION)
+const Transactions = ({ transactions, openEditTransaction, useRomanNumerals = false }) => {
   const [modalOpen, setModalOpen] = useState(false)
   const [activeId, setActiveId] = useState(null)
-
-  if (loading) return (<div>Loading</div>)
-  if (error) return (<div>There has been an error</div>)
+  const [deleteTransaction] = useMutation(DELETE_TRANSACTION)
 
   return (
     <div css={styles.container}>
       {
-        data && data.transactions.length ? data.transactions.map((txn, i) => (
-          <button css={[styles.transaction, i === data.transactions.length - 1 ? styles.last : '']} key={txn.id} onClick={() => openEditTransaction(txn)}>
+        transactions.length ? transactions.map((txn, i) => (
+          <button css={[styles.transaction, i === transactions.length - 1 ? styles.last : '']} key={txn.id} onClick={() => openEditTransaction(txn)}>
             <div>
               <p css={styles.desc}>{txn.description || 'Unknown'}</p>
               <p css={styles.type}>{txn.credit ? 'Credit' : 'Debit'}</p>
@@ -49,11 +45,17 @@ const Transactions = ({ openEditTransaction, useRomanNumerals = false }) => {
           }}>Cancel</Button>
           <Button
             color='coral'
-            onClick={() => deleteTransaction({
-              variables: {
-                id: activeId
-              }
-            })}
+            onClick={() => {
+              deleteTransaction({
+                variables: {
+                  id: activeId
+                },
+                refetchQueries: [{
+                  query: GET_TRANSACTIONS
+                }]
+              })
+              return setModalOpen(false)
+            }}
           >
             Delete
           </Button>
@@ -65,7 +67,8 @@ const Transactions = ({ openEditTransaction, useRomanNumerals = false }) => {
 
 Transactions.propTypes = {
   openEditTransaction: PropTypes.func.isRequired,
-  useRomanNumerals: PropTypes.bool.isRequired
+  useRomanNumerals: PropTypes.bool.isRequired,
+  transactions: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 }
 Transactions.defaultProps = {}
 

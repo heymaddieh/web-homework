@@ -53,10 +53,11 @@ const CreateTransactionModal = (props) => {
         credit,
         category
       },
-      refreshQueries: [{
-        queries: GET_TRANSACTIONS
+      refetchQueries: [{
+        query: GET_TRANSACTIONS
       }]
     })
+    return closeModal()
   }
 
   const submitCreatedTransaction = async () => {
@@ -68,8 +69,8 @@ const CreateTransactionModal = (props) => {
         credit,
         category
       },
-      refreshQueries: [{
-        queries: GET_TRANSACTIONS
+      refetchQueries: [{
+        query: GET_TRANSACTIONS
       }]
     })
     return closeModal()
