@@ -20,13 +20,15 @@ const CreateTransactionModal = (props) => {
     amount: activeTransaction ? activeTransaction.amount : 0,
     description: activeTransaction ? activeTransaction.description : '',
     debit: activeTransaction ? activeTransaction.debit : false,
-    credit: activeTransaction ? activeTransaction.credit : false
+    credit: activeTransaction ? activeTransaction.credit : false,
+    category: activeTransaction ? activeTransaction.category : ''
   }
 
   const [amount, setAmount] = useState(initialState.amount)
   const [description, setDescription] = useState(initialState.description)
   const [debit, setDebit] = useState(initialState.debit)
   const [credit, setCredit] = useState(initialState.credit)
+  const [category, setCategory] = useState(initialState.category)
 
   const [createTransaction] = useMutation(CREATE_TRANSACTION)
   const [editTransaction] = useMutation(UPDATE_TRANSACTION)
@@ -48,7 +50,8 @@ const CreateTransactionModal = (props) => {
         amount: parseInt(amount, 10),
         description,
         debit,
-        credit
+        credit,
+        category
       },
       refreshQueries: [{
         queries: GET_TRANSACTIONS
@@ -62,7 +65,8 @@ const CreateTransactionModal = (props) => {
         amount: parseInt(amount, 10),
         description,
         debit,
-        credit
+        credit,
+        category
       },
       refreshQueries: [{
         queries: GET_TRANSACTIONS
@@ -71,7 +75,9 @@ const CreateTransactionModal = (props) => {
     return closeModal()
   }
 
-  const disabled = !amount || !description || (!credit && !debit)
+  const disabled = !amount || !description || (!credit && !debit) || !category
+
+  const categories = ['Fast Food', 'Groceries', 'Rent', 'Utilities', 'Fun', 'Other']
 
   return (
     <ModalWrapper {...props}>
@@ -83,6 +89,14 @@ const CreateTransactionModal = (props) => {
         value={amount}
       />
       <Input label={'Description'} onChange={setDescription} value={description} />
+      <label css={styles.catLabel}>
+        Category
+        {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+        <select onChange={(e) => setCategory(e.target.value)} value={category}>
+          <option value={''}>Choose one...</option>
+          {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+        </select>
+      </label>
       <fieldset css={styles.transactionTypeContainer}>
         <legend>Transaction Type</legend>
         <RadioButton
@@ -123,6 +137,14 @@ const styles = {
     borderRadius: '4px',
     border: `1px solid ${colors.grey}`,
     marginBottom: '25px'
+  }),
+  catLabel: css({
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: '15px',
+    'select': {
+      marginTop: '5px'
+    }
   })
 }
 

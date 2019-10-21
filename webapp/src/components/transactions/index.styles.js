@@ -14,7 +14,7 @@ export default {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottom: `1px solid rgba(129, 129, 135, 0.67)`,
+    borderBottom: `1px solid ${colors.lightGrey}`,
     padding: '10px',
     borderTopRightRadius: '4px',
     borderTopLeftRadius: '4px',

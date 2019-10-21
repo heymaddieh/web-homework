@@ -4,6 +4,7 @@ import { css, Global } from '@emotion/core'
 
 import Home from './home/index'
 import { colors } from '../global'
+import Metrics from './metrics'
 
 const AppRouter = (props) => {
   return (
@@ -28,6 +29,7 @@ const AppRouter = (props) => {
         </nav>
         <div css={styles.mainContent}>
           <Route component={Home} exact path='/' />
+          <Route component={Metrics} exact path='/metrics' />
         </div>
       </div>
     </Router>

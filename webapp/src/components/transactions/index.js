@@ -36,7 +36,7 @@ const Transactions = ({ openEditTransaction, useRomanNumerals = false }) => {
             </div>
           </button>
         )) : (
-          <div>No transactions have been found. </div>
+          <div style={{ margin: '15px' }}>No transactions have been found. </div>
         )
       }
       <ModalWrapper open={modalOpen}>

@@ -6,5 +6,6 @@ export const colors = {
   purple: '#616283',
   lightBlue: '#9CFFFA',
   green: '#5FAD41',
-  grey: '#818187'
+  grey: '#818187',
+  lightGrey: 'rgba(129, 129, 135, 0.67)'
 }

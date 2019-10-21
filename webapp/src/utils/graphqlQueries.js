@@ -8,6 +8,7 @@ export const GET_TRANSACTIONS = gql`
       credit
       debit
       description
+      category
     }
   }
 `
@@ -18,17 +19,20 @@ export const CREATE_TRANSACTION = gql`
     $amount: Float!
     $credit: Boolean!
     $debit: Boolean!
+    $category: String!
   ) {
     addTransaction (
       description: $description
       amount: $amount
       credit: $credit
       debit: $debit
+      category: $category
     ){
       description
       amount
       credit
       debit
+      category
     }
   }
 `
@@ -40,6 +44,7 @@ export const UPDATE_TRANSACTION = gql`
     $amount: Float!
     $credit: Boolean!
     $debit: Boolean!
+    $category: String!
   ) {
     updateTransaction(
       id: $id
@@ -47,12 +52,14 @@ export const UPDATE_TRANSACTION = gql`
       amount: $amount
       credit: $credit
       debit: $debit
+      category: $category
     ) {
         id      
         description
         amount
         credit
         debit
+        category
       }
   }
 `
